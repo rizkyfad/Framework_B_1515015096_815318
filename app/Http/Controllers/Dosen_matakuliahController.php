@@ -25,4 +25,24 @@ class Dosen_matakuliahController extends Controller
    	$dosen_matakuliah->save();   
    	return "Data dosen_matakuliah {$dosen_matakuliah->matakuliah_id} telah disimpan";
 }
+   public function semua_dosen() {
+   $dosen = dosen_matakuliah::all();  //untuk menampilkan semua data 
+   foreach ($dosen as $dos) {  //panggilnya pakai foreach
+   echo "nama dosen :" .$dos->dosen->nama;
+   echo "<br>";
+   echo "NIP :" .$dos->dosen->nip;
+   echo "<p>";} 
+   }
+public function semua_matkul() {
+   $dosen = dosen_matakuliah::first();  //untuk menampilkan semua data 
+   echo "nama dosen :" .$dosen->dosen->nama;
+      echo "<br>";
+   echo "Matkul :" .$dosen->matakuliah->title;
+   $matkul = $dosen->matakuliah_id;
+// $dosen->matakuliah->title;
+   echo "<br>";
+   echo " Mengajar Pada matakuliah : " .matakuliah::where('id', '=', $matkul)
+                                       ->select('title')
+                                       ->get();
+}
 }

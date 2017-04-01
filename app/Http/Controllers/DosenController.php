@@ -27,4 +27,12 @@ class DosenController extends Controller
    	$dosen->save();   
    	return "data dengan nama pak/bu {$dosen->nama} telah disimpan";
    }
+   public function ket_dosen() {
+      $keterangan = dosen::all();  //untuk menampilkan semua data 
+      foreach ($keterangan as $ket) {  //panggilnya pakai foreach
+      echo "nama :" .$ket->nama;
+      echo "<br>";
+      echo "Di buat oleh :" .$ket->pengguna->username; 
+      echo "<p>";}
+   }
 }
