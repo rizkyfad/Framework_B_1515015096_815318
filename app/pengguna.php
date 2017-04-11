@@ -4,21 +4,28 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class pengguna extends Model
+class Pengguna extends Model
 {
-    protected $table = 'pengguna';
-    
-    public function dosen()//membuat function dosen
-	{
-		return $this->hasOne(Dosen::class);//membuat relasi one to one ke dosen dari table pengguna
-	}
-	public function mahasiswa()//membuat function mahasiswa
-	{
-		return $this->hasOne(Mahasiswa::class);//membuat relasi one to one ke table dosen dari table pengguna
-	}
-	//public function peran();
-	//{
-	//	return this->belongsToMany(peran::class);
-	//}
+
+    protected $table = 'pengguna';// digunakan untuk mendeklarasikan tabel pengguna
+
+ protected $guarded=['id'];    
+
     //protected $fillable = ['username','password'];
+
+    //DISINI MODEL PENGGUNA BERELASI DENGAN MODEL MAHASISWA DAN DOSEN
+
+    public function mahasiswa(){ //UNTUK MENENTUKAN HUBUNGANNYA, DIBUAT FUNGSI MAHASISWA PADA MODEL PENGGUNA 
+
+    	return $this->hasOne(Mahasiswa::class) ;// memberikan nilai return dari fungsi hasOne yang merelasikan pengguna dengan mahasiswa dengan foreign key pengguna_id
+    } 
+
+    public function dosen(){ //UNTUK MENENTUKAN HUBUNGANNYA, DIBUAT FUNGSI DOSEN PADA MODEL PENGGUNA 
+		
+        return $this->hasOne(Dosen::class); // memberikan nilai return dari fungsi hasOne yang merelasikan pengguna dengan dosen dengan foreign key pengguna_id
+	}
+	
+	//public function peran(){
+	//return $this->belongsToMany(Peran::class);
+	// }
 }

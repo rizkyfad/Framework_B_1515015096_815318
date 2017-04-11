@@ -4,20 +4,29 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class jadwal_matakuliah extends Model
+class Jadwal_matakuliah extends Model
 {
-    protected $table = 'Jadwal_matakuliah';
-    public function Mahasiswa()//membuat function Mahasiswa
-    {
-		return $this->belongsTo(Mahasiswa::class); //kebalikan dari hasmany pada table mahasiswa yaitu relasi one to many
-	}
-	public function Ruanagn()//membuat function Ruangan
-	{
-		return $this->belongsTo(Ruangan::class);//kebalikan dari hasmany pada table ruangan yaitu relasi one to many
-	}	
-	public function dosen_matakuliah()//membuat function dosen_matakuliah
-	{
-		return $this->belongsTo(Dosen_matakuliah::class);//kebalikan dari hasmany pada table dosen_matakuliah yaitu relasi one to many
-	}
-    //protected $fillable = ['matakuliah_id','ruangan_id','dosen_matakuliah_id'];
+    protected $table = 'jadwal_matakuliah'; // digunakan untuk mendeklarasikan tabel jadwal_matakuliah
+
+    protected $guarded = ['id']; // mengabaikan atribut id pada saat melakikan insert/update
+
+    //protected $fillable = ['mahasiswa_id','ruangan_id','dosen_matakuliah_id'];
+
+    //DISINI MODEL JADWAL_MATAKULIAH BERELASI DENGAN MODEL MAHASISWA, DOSEN_MATAKULIAH DAN RUANGAN
+
+    public function mahasiswa(){ // UNTUK MENENTUKAN HUBUNGANNYA, DIBUAT FUNGSI DENGAN NAMA MAHASISWA PADA MODEL JADWAL_MATAKULIAH
+
+    return $this->belongsTo(mahasiswa::class); // memberikan nilai return dari fungsi belongsTo yang merelasikan banyak jadwal_matakuliah dengan mahasiswa
+
+	  }
+
+	  public function dosen_matakuliah(){  // UNTUK MENENTUKAN HUBUNGANNYA, DIBUAT FUNGSI DENGAN NAMA DOSEN_MATAKULIAH PADA MODEL JADWAL_MATAKULIAH
+
+    return $this->belongsTo(Dosen_matakuliah::class); // memberikan nilai return dari fungsi belongsTo yang merelasikan dosen_matakuliah dengan banyak jadwal_Matakuliah
+    }
+
+    public function ruangan(){ // UNTUK MENENTUKAN HUBUNGANNYA, DIBUAT FUNGSI DENGAN NAMA RUANGAN PADA MODEL JADWAL_MATAKULIAH
+
+    return $this->belongsTo(Ruangan::class); // memberikan nilai return dari fungsi belongsTo yang merelasikan ruangan dengan banyak jadwal_matakuliah
+   }
 }
