@@ -16,7 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $x=1;?>
+			<?php $x=(1+($data->CurrentPage()-1)*3);?>
 			@foreach ($data as $matakuliah)
 				<tr>
 					<td>{{ $x++ }}</td>
@@ -34,5 +34,8 @@
 				@endforeach
 		</tbody>
 	</table>
+</div>
+<div align="center">
+	{{ $data->render()}}
 </div>
 @stop
